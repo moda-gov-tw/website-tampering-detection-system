@@ -1,0 +1,30 @@
+server:
+  port: 8088
+
+spring:
+  datasource:
+    url:
+    username: 'username'
+    password: ${DB_PASSWORD}
+  profiles:
+    active: '@spring.profiles.active@'
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: 'username'
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+app:
+  jwt:
+    jwtSecret: jwtSecretKey
+    #jwtExpiration: 86400000
+    jwtExpiration: 86400000 #單位是ms ex 10000 就是10秒,這邊設定1天
+  cors:
+    allowed-origins: ''

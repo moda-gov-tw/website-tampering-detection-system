@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "password": "${USER_PASSWORD}",
+    "roles": ["ROLE_ADMIN","ROLE_USER"]
+  }
+]

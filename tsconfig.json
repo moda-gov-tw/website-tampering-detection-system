@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./src/main/webapp/app",
+        "paths": {
+            "@/*": ["*"]
+          },
+        "outDir": "target/out-tsc/dist",
+        "sourceMap": true,
+        "strict": true,
+        "noImplicitReturns": true,
+        "noImplicitAny": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "target": "es5",
+        "allowJs": true
+    },
+    "include": ["src/main/webapp/app"],
+    "exclude": ["node_modules"]
+}
