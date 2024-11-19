@@ -5,7 +5,8 @@ import com.jcraft.jsch.*;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
-import java.util.Properties;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Component
 public class CommonSSHUtils {
@@ -81,12 +82,12 @@ public class CommonSSHUtils {
     private static void copyRemoteToLocal(Session session, String from, String to, String fileName) throws JSchException, IOException {
         // 校驗 fileName 以避免目錄穿越攻擊
         if (!isValidFileName(fileName)) {
-            throw new IllegalArgumentException("非法文件名");
+            throw new IllegalArgumentException("非法文件名: " + fileName);
         }
 
         // 校驗 from 和 to 路徑是否是合法路徑
         if (!isValidPath(from) || !isValidPath(to)) {
-            throw new IllegalArgumentException("非法路径");
+            throw new IllegalArgumentException("非法路徑: " + from + " 或 " + to);
         }
 
         from = from + File.separator + fileName;
@@ -153,8 +154,14 @@ public class CommonSSHUtils {
             out.write(buf, 0, 1);
             out.flush();
 
+            Path outputPath;
+            if (prefix == null) {
+                outputPath = Paths.get(to);
+            } else {
+                outputPath = Paths.get(prefix).resolve(file).normalize(); // Resolve and normalize the path
+            }
             // read a content of lfile
-            FileOutputStream fos = new FileOutputStream(prefix == null ? to : prefix + file);
+            FileOutputStream fos = new FileOutputStream(outputPath.toFile());
             int foo;
             while (true) {
                 if (buf.length < filesize) foo = buf.length;

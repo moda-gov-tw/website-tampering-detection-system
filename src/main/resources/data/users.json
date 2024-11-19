@@ -2,7 +2,7 @@
   {
     "id": 1,
     "username": "admin",
-    "password": "${USER_PASSWORD}",
+    "password": "admin",
     "roles": ["ROLE_ADMIN","ROLE_USER"]
   }
 ]
