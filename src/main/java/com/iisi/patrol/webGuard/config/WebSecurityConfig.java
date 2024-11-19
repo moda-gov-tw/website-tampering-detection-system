@@ -75,7 +75,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/service/**").permitAll()
-                        .requestMatchers("/**.{js,html}").permitAll()
+                        .requestMatchers("/**.js").permitAll()     // Separate patterns for js files
+                        .requestMatchers("/**.html").permitAll()   // Separate patterns for html files
                         .requestMatchers("/content/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated()
