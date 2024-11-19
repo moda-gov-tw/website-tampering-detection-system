@@ -52,7 +52,7 @@ public class FileComparisonService {
             log.info("fromServerLocation path :{}", fromServerLocation);
             log.info("originLocation path :{}", originLocation);
 
-            ConnectionConfig connectionConfig = new ConnectionConfig(iwgHostsDTO.getHostname(), iwgHostsDTO.getUsername(), PassWordEncodeUtils.decodePassword(iwgHostsDTO.getPassword()), iwgHostsDTO.getPort());
+            ConnectionConfig connectionConfig = new ConnectionConfig(iwgHostsDTO.getHostname(), iwgHostsDTO.getUsername(), PassWordEncodeUtils.decodePassword(iwgHostsDTO.getPwd()), iwgHostsDTO.getPort());
             try {
                 Instant triggerTime = Instant.now();
                 FileSizeStatusEnums fileStatus = this.compareSizeByCommand(connectionConfig, fileName, serverLocation, originLocation);
@@ -112,7 +112,7 @@ public class FileComparisonService {
      */
     public void fileCompareInMD5ByHostAndTargetList(IwgHostsDTO iwgHostsDTO, List<IwgHostsTargetDTO> iwgHostsTargetDTOs) {
         //一個host一個連線資訊
-        ConnectionConfig connectionConfig = new ConnectionConfig(iwgHostsDTO.getHostname(), iwgHostsDTO.getUsername(), PassWordEncodeUtils.decodePassword(iwgHostsDTO.getPassword()), iwgHostsDTO.getPort());
+        ConnectionConfig connectionConfig = new ConnectionConfig(iwgHostsDTO.getHostname(), iwgHostsDTO.getUsername(), PassWordEncodeUtils.decodePassword(iwgHostsDTO.getPwd()), iwgHostsDTO.getPort());
         //針對host所有的target做比對
         for (IwgHostsTargetDTO targetDTO : iwgHostsTargetDTOs) {
             //看target是否是單一檔案 或是 一個目錄

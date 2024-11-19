@@ -9,7 +9,7 @@ import java.time.Instant;
 public class IwgHostsDTO implements Serializable {
 
 
-    private String password;
+    private String pwd;
     private String username;
     private String hostname;
     private Integer port;
