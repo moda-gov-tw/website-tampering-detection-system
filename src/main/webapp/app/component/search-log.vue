@@ -205,10 +205,10 @@ export default {
         .then((data) => {
           // ele.forEach((e) => {});
           table.data = data.data;
-          console.log("table.data", table.data);
+          // console.log("table.data", table.data);
         })
         .catch((error) => {
-          console.log("catch", error);
+          // console.log("catch", error);
         });
       // table.data = [];
       // table.totalItems = 1;

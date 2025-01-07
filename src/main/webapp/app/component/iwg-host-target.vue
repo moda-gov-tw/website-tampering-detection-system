@@ -76,7 +76,7 @@ export default {
     }
 
     function toIwgHostTargetSetting(iwghost: any) {
-      console.log("iwghost", iwghost.id);
+      // console.log("iwghost", iwghost.id);
       if (iwghost !== null && iwghost.id) {
         router.push({ path: `iwg-host-target/setting/${iwghost.id}` });
       }

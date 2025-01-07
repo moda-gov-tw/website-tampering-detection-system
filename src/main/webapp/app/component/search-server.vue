@@ -77,7 +77,7 @@ export default {
   props: ["currentComponent"],
   setup(props: any, content: any) {
     const currentComponentprops = toRef(props, "currentComponent");
-    console.log(currentComponentprops);
+    // console.log(currentComponentprops);
 
     const stepVisible = ref(false);
     const page = ref(1); //當前頁面
@@ -162,7 +162,7 @@ export default {
           table.data = data.data;
         })
         .catch((error) => {
-          console.log("catch", error);
+          // console.log("catch", error);
         });
     };
 

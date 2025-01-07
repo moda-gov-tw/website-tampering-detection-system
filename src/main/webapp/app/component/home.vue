@@ -115,11 +115,11 @@ export default {
       axios
         .get("testResource")
         .then((response: any) => {
-          console.log(response);
+          // console.log(response);
           result.value = response.data;
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
     };
 

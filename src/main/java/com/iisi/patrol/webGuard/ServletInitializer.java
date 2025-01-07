@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		System.out.println("server is running on ServletInitializer");
+		// System.out.println("server is running on ServletInitializer");
 		return application.sources(WebGuardApplication.class);
 	}
 

@@ -11,8 +11,8 @@ function resolve(dir = "") {
 }
 //用webpack merge 切分開發環境與建置環境
 module.exports = async (env, options) => {
-  console.log("env:", env);
-  console.log("options:", options);
+  // console.log("env:", env);
+  // console.log("options:", options);
   const development = options.mode === "development"; //判斷為開發模式dev或是打包正式環境prod
   const webpackConfig = await merge(
     {

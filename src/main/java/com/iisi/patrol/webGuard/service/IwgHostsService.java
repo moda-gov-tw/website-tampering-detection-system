@@ -59,7 +59,7 @@ public class IwgHostsService {
     public List<IwgHosts> findAll() {
         List<IwgHosts> iwgHostss = iwgHostsRepository.findAll();
         for (IwgHosts hosts : iwgHostss) {
-            hosts.setPwd(PassWordEncodeUtils.decodePassword(hosts.getPwd()));
+            // hosts.setPwd(PassWordEncodeUtils.decodePassword(hosts.getPwd()));
         }
         return iwgHostss;
     }
@@ -86,12 +86,12 @@ public class IwgHostsService {
         iwgHostsDTO.setUpdateTime(Instant.now());
         iwgHostsDTO.setUpdateUser(user);
         //主機密碼加密
-        String encodedPassword = PassWordEncodeUtils.encodePassword(iwgHostsDTO.getPwd().toCharArray());
-        iwgHostsDTO.setPwd(encodedPassword);
+        // String encodedPassword = PassWordEncodeUtils.encodePassword(iwgHostsDTO.getPwd().toCharArray());
+        // iwgHostsDTO.setPwd(encodedPassword);
 
         IwgHosts iwgHosts = iwgHostsMapper.toEntity(iwgHostsDTO);
         IwgHosts domain = iwgHostsRepository.save(iwgHosts);
-        domain.setPwd(PassWordEncodeUtils.decodePassword(domain.getPwd()));
+        // domain.setPwd(PassWordEncodeUtils.decodePassword(domain.getPwd()));
         return iwgHostsMapper.toDto(domain);
     }
 
@@ -99,12 +99,12 @@ public class IwgHostsService {
         iwgHostsDTO.setCreateTime(Instant.now());
         iwgHostsDTO.setCreateUser(user);
         //主機密碼加密
-        String encodedPassword = PassWordEncodeUtils.encodePassword(iwgHostsDTO.getPwd().toCharArray());
-        iwgHostsDTO.setPwd(encodedPassword);
+        // String encodedPassword = PassWordEncodeUtils.encodePassword(iwgHostsDTO.getPwd().toCharArray());
+        // iwgHostsDTO.setPwd(encodedPassword);
 
         IwgHosts iwgHosts = iwgHostsMapper.toEntity(iwgHostsDTO);
         IwgHosts domain = iwgHostsRepository.save(iwgHosts);
-        domain.setPwd(PassWordEncodeUtils.decodePassword(domain.getPwd()));
+        // domain.setPwd(PassWordEncodeUtils.decodePassword(domain.getPwd()));
         return iwgHostsMapper.toDto(domain);
     }
 }

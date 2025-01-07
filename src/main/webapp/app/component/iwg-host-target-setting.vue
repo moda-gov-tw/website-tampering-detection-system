@@ -161,7 +161,7 @@ export default {
     },
   },
   setup(props: any) {
-    console.log("props", props);
+    // console.log("props", props);
     let hostId = "";
     const idRef: any = toRef(props, "id");
     const hostData = reactive({
@@ -294,8 +294,8 @@ export default {
         ...folderTargetList
       );
 
-      console.log(iwgHostTargetFileList);
-      console.log(iwgHostTargetFolderList);
+      // console.log(iwgHostTargetFileList);
+      // console.log(iwgHostTargetFolderList);
       // Object.assign(iwgHostList, hostList.data);
       // resultData.splice(0, resultData.length, hostList.data);
     }
@@ -318,7 +318,7 @@ export default {
     }
     async function editHostFile(){
       let response: any = await axios.post("/iwg-hosts-target/update",targetFileObj);
-      console.log(response);
+      // console.log(response);
       showHostFileTargetModal.value = false;
       findIwgHostTargetByHostId(idRef.value);
     }
@@ -338,7 +338,7 @@ export default {
     watch(
       idRef,
       (newValue: string) => {
-        console.log(newValue);
+        // console.log(newValue);
         hostId = newValue;
         findIwgHostTargetByHostId(newValue);
         findHostById(newValue);

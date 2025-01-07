@@ -288,10 +288,10 @@ export default {
           .post("/create/iwgHosts", formDefault)
           .then((response: any) => {
             notificationService.info("新增成功");
-            console.log("then", response);
+            // console.log("then", response);
           })
           .catch((error) => {
-            console.log("catch", error);
+            // console.log("catch", error);
           });
       }
     };

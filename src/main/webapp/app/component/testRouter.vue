@@ -42,13 +42,13 @@ export default {
       axios
         .get("testResource")
         .then((response: any) => {
-          console.log(response);
+          // console.log(response);
           result.value = response.data;
           notificationService.info(response.data);
         })
         .catch((error) => {
           notificationService.danger(error);
-          console.log(error);
+          // console.log(error);
         });
     };
 

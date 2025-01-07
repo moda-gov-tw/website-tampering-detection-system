@@ -52,7 +52,7 @@ public class FileComparisonService {
             log.info("fromServerLocation path :{}", fromServerLocation);
             log.info("originLocation path :{}", originLocation);
 
-            ConnectionConfig connectionConfig = new ConnectionConfig(iwgHostsDTO.getHostname(), iwgHostsDTO.getUsername(), PassWordEncodeUtils.decodePassword(iwgHostsDTO.getPwd()), iwgHostsDTO.getPort());
+            ConnectionConfig connectionConfig = new ConnectionConfig(iwgHostsDTO.getHostname(), iwgHostsDTO.getUsername(), iwgHostsDTO.getPwd(), iwgHostsDTO.getPort());
             try {
                 Instant triggerTime = Instant.now();
                 FileSizeStatusEnums fileStatus = this.compareSizeByCommand(connectionConfig, fileName, serverLocation, originLocation);
@@ -112,7 +112,7 @@ public class FileComparisonService {
      */
     public void fileCompareInMD5ByHostAndTargetList(IwgHostsDTO iwgHostsDTO, List<IwgHostsTargetDTO> iwgHostsTargetDTOs) {
         //一個host一個連線資訊
-        ConnectionConfig connectionConfig = new ConnectionConfig(iwgHostsDTO.getHostname(), iwgHostsDTO.getUsername(), PassWordEncodeUtils.decodePassword(iwgHostsDTO.getPwd()), iwgHostsDTO.getPort());
+        ConnectionConfig connectionConfig = new ConnectionConfig(iwgHostsDTO.getHostname(), iwgHostsDTO.getUsername(), iwgHostsDTO.getPwd(), iwgHostsDTO.getPort());
         //針對host所有的target做比對
         for (IwgHostsTargetDTO targetDTO : iwgHostsTargetDTOs) {
             //看target是否是單一檔案 或是 一個目錄
@@ -125,7 +125,7 @@ public class FileComparisonService {
                 FileHashStatusEnums fileStatus;
                 //fileStatus 取得比對後的狀態(正常/不正常)
                 try {
-                    fileStatus = this.compareSingleFileMd5ByCommand(connectionConfig, fileName, serverLocation, originLocation);
+                    fileStatus = this.compareSingleFileByCommand(connectionConfig, fileName, serverLocation, originLocation);
                     Instant finishTime = Instant.now();
                     //針對fileStatus狀態做不同處理
                     this.handleSingleFileComparisonResult(fileStatus, iwgHostsDTO, connectionConfig, originLocation, serverLocation, fileName, triggerTime, finishTime);
@@ -296,7 +296,7 @@ public class FileComparisonService {
      * @throws IOException
      * @throws NoSuchAlgorithmException
      */
-    private FileHashStatusEnums compareSingleFileMd5ByCommand(ConnectionConfig connectionConfig, String fileName, String serverLocation, String originLocation) throws JSchException, IOException, NoSuchAlgorithmException {
+    private FileHashStatusEnums compareSingleFileByCommand(ConnectionConfig connectionConfig, String fileName, String serverLocation, String originLocation) throws JSchException, IOException, NoSuchAlgorithmException {
 
         //取得remote單檔的md5
         String response = CommonSSHUtils.useSshCommand(connectionConfig, "md5sum " + serverLocation + fileName);

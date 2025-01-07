@@ -2,6 +2,7 @@ package com.iisi.patrol.webGuard.service;
 
 import com.iisi.patrol.webGuard.service.sshService.ConnectionConfig;
 import com.jcraft.jsch.*;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -74,7 +75,7 @@ public class CommonSSHUtils {
             session.connect();
             return session;
         } catch (JSchException e) {
-            System.out.println(e);
+            // System.out.println(e);
             return null;
         }
     }
@@ -156,9 +157,9 @@ public class CommonSSHUtils {
 
             Path outputPath;
             if (prefix == null) {
-                outputPath = Paths.get(to);
+                outputPath = Paths.get(FilenameUtils.normalize(to));
             } else {
-                outputPath = Paths.get(prefix).resolve(file).normalize(); // Resolve and normalize the path
+                outputPath = Paths.get(prefix).resolve(FilenameUtils.normalize(file)); // Resolve and normalize the path
             }
             // read a content of lfile
             FileOutputStream fos = new FileOutputStream(outputPath.toFile());
@@ -188,7 +189,7 @@ public class CommonSSHUtils {
             try {
                 if (fos != null) fos.close();
             } catch (Exception ex) {
-                System.out.println(ex);
+                // System.out.println(ex);
             }
         }
 
@@ -318,7 +319,7 @@ public class CommonSSHUtils {
         try {
             if (fis != null) fis.close();
         } catch (Exception ex) {
-            System.out.println(ex);
+            // System.out.println(ex);
         }
 
         channel.disconnect();

@@ -212,15 +212,15 @@ export default {
       resultData.splice(0, resultData.length, hostList.data);
     }
     async function editOne() {
-      console.log('editOne')
-      console.log(form)
+      // console.log('editOne')
+      // console.log(form)
       await axios.post("/update/iwgHost", form);
       showIwgHostDataModal.value = false;
       await findAllIwgHost();
     }
     async function addOne() {
-      console.log('addOne')
-      console.log(form)
+      // console.log('addOne')
+      // console.log(form)
       await axios.post("/add/iwgHost", form);
       showIwgHostDataModal.value = false;
       await findAllIwgHost();

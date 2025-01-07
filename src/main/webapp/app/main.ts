@@ -14,12 +14,12 @@ setupAxiosInterceptors(
   (error: any) => {
     const url = error.response?.config?.url;
     const status = error.status || error.response.status;
-    console.log("Unauthorized!");
+    // console.log("Unauthorized!");
     return Promise.reject(error);
   },
   //處理500  error,onServerError 500
   (error: any) => {
-    console.log("Server error!");
+    // console.log("Server error!");
     return Promise.reject(error);
   }
 );

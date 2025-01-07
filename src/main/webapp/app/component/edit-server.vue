@@ -89,7 +89,7 @@ export default {
   setup(props: any) {
     const notificationService = new NotificationService();
     const searchConProp = toRef(props, "searchCon");
-    console.log("searchConProp", toRaw(searchConProp.value));
+    // console.log("searchConProp", toRaw(searchConProp.value));
 
     onMounted(() => {
       formDefault.value.id = searchConProp.value.id;
@@ -105,7 +105,7 @@ export default {
       id: "",
       targetFilenanme: "",
       //
-      password: "",
+      pwd: "",
       username: "",
       hostname: "",
       port: "",
@@ -125,7 +125,7 @@ export default {
       id: {},
       targetFilenanme: {},
       //iwgjosts
-      password: {},
+      pwd: {},
       username: {},
       hostname: {},
       port: {},
@@ -146,16 +146,16 @@ export default {
     };
 
     const toSave = () => {
-      console.log("then", formDefault.value);
+      // console.log("then", formDefault.value);
       axios
         .post("/update/iwgHosts", formDefault.value)
         .then((response: any) => {
           notificationService.info("修改成功");
-          console.log("then", response);
+          // console.log("then", response);
           router.push({ path: "/searchServer" });
         })
         .catch((error) => {
-          console.log("catch", error);
+          // console.log("catch", error);
         });
     };
     const toBack = () => {
@@ -165,7 +165,7 @@ export default {
     watch(
       searchConProp,
       (aa) => {
-        formDefault.value.password = aa.id;
+        formDefault.value.pwd = aa.id;
       },
 
       { immediate: true }
