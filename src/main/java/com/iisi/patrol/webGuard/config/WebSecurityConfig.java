@@ -25,6 +25,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 public class WebSecurityConfig {
 
@@ -66,7 +68,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())
+                .csrf(withDefaults())
                 .headers(headers -> headers.frameOptions().disable().disable())
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling.authenticationEntryPoint(unauthorizedHandler))

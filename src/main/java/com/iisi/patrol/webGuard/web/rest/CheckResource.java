@@ -18,7 +18,22 @@ public class CheckResource {
     @PostMapping("/service/check-file")
     public boolean checkFile(@RequestBody String fullFilePathWithFileName) throws Exception {
 
-        File f = new File(fullFilePathWithFileName);
+        // Validate the file path
+        if (fullFilePathWithFileName.contains("..") || fullFilePathWithFileName.contains("/") || fullFilePathWithFileName.contains("\\")) {
+            throw new IllegalArgumentException("Invalid file path");
+        }
+
+        // Define the base directory
+        File baseDir = new File("/safe/directory");
+
+        // Normalize the user-provided path
+        File f = new File(baseDir, fullFilePathWithFileName).getCanonicalFile();
+
+        // Ensure the file is within the base directory
+        if (!f.getPath().startsWith(baseDir.getCanonicalPath() + File.separator)) {
+            throw new IllegalArgumentException("Invalid file path");
+        }
+
         if(f.exists() && !f.isDirectory()) {
            return true;
         }else{

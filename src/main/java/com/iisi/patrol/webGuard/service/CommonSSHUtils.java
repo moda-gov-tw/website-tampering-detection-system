@@ -8,9 +8,12 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Set;
 
 @Component
 public class CommonSSHUtils {
+
+    private static final Set<String> AUTHORIZED_IPS = Set.of("192.168.1.1", "192.168.1.2"); // Add authorized IPs here
 
     public static String useSshCommand(ConnectionConfig connectionConfig, String command) throws JSchException {
 
@@ -19,7 +22,11 @@ public class CommonSSHUtils {
         String responseString = null;
         String errorString = "";
         try {
-            session = new JSch().getSession(connectionConfig.getUserName(), connectionConfig.getServerIp(), connectionConfig.getPort());
+            String serverIp = connectionConfig.getServerIp();
+            if (!isAuthorizedIp(serverIp)) {
+                throw new JSchException("Unauthorized server IP address: " + serverIp);
+            }
+            session = new JSch().getSession(connectionConfig.getUserName(), serverIp, connectionConfig.getPort());
             session.setPassword(connectionConfig.getPassWord());
             session.setConfig("StrictHostKeyChecking", "no");
             session.connect();
@@ -53,6 +60,10 @@ public class CommonSSHUtils {
         }
 
         return responseString.trim();
+    }
+
+    private static boolean isAuthorizedIp(String ip) {
+        return AUTHORIZED_IPS.contains(ip);
     }
 
     public static void useScpCopyRemoteFile(ConnectionConfig connectionConfig,String from, String to,String fileName) throws JSchException, IOException {
